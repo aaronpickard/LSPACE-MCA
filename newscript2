@@ -1,0 +1,253 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2020-05-18 03:02:46
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft IceNine;
+GMAT IceNine.DateFormat = TAIModJulian;
+GMAT IceNine.Epoch = '21545';
+GMAT IceNine.CoordinateSystem = MoonMJ2000Eq;
+GMAT IceNine.DisplayStateType = Keplerian;
+GMAT IceNine.SMA = 1957;
+GMAT IceNine.ECC = 1.772624786823061e-16;
+GMAT IceNine.INC = 90;
+GMAT IceNine.RAAN = 0;
+GMAT IceNine.AOP = 0;
+GMAT IceNine.TA = 0;
+GMAT IceNine.DryMass = 6;
+GMAT IceNine.Cd = 2.2;
+GMAT IceNine.Cr = 1.8;
+GMAT IceNine.DragArea = 15;
+GMAT IceNine.SRPArea = 1;
+GMAT IceNine.Tanks = {AFM315E};
+GMAT IceNine.Thrusters = {BGTX5};
+GMAT IceNine.NAIFId = -10001001;
+GMAT IceNine.NAIFIdReferenceFrame = -9001001;
+GMAT IceNine.OrbitColor = Red;
+GMAT IceNine.TargetColor = Teal;
+GMAT IceNine.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+GMAT IceNine.CdSigma = 1e+70;
+GMAT IceNine.CrSigma = 1e+70;
+GMAT IceNine.Id = 'SatId';
+GMAT IceNine.Attitude = CoordinateSystemFixed;
+GMAT IceNine.SPADSRPScaleFactor = 1;
+GMAT IceNine.ModelFile = 'aura.3ds';
+GMAT IceNine.ModelOffsetX = 0;
+GMAT IceNine.ModelOffsetY = 0;
+GMAT IceNine.ModelOffsetZ = 0;
+GMAT IceNine.ModelRotationX = 0;
+GMAT IceNine.ModelRotationY = 0;
+GMAT IceNine.ModelRotationZ = 0;
+GMAT IceNine.ModelScale = 1;
+GMAT IceNine.AttitudeDisplayStateType = 'Quaternion';
+GMAT IceNine.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT IceNine.AttitudeCoordinateSystem = MoonMJ2000Eq;
+GMAT IceNine.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- Hardware Components
+%----------------------------------------
+
+Create ChemicalTank AFM315E;
+GMAT AFM315E.AllowNegativeFuelMass = false;
+GMAT AFM315E.FuelMass = 4;
+GMAT AFM315E.Pressure = 1550;
+GMAT AFM315E.Temperature = 20;
+GMAT AFM315E.RefTemperature = 20;
+GMAT AFM315E.Volume = 0.75;
+GMAT AFM315E.FuelDensity = 1470;
+GMAT AFM315E.PressureModel = PressureRegulated;
+
+Create ChemicalThruster BGTX5;
+GMAT BGTX5.CoordinateSystem = Local;
+GMAT BGTX5.Origin = Luna;
+GMAT BGTX5.Axes = VNB;
+GMAT BGTX5.ThrustDirection1 = 1;
+GMAT BGTX5.ThrustDirection2 = 0;
+GMAT BGTX5.ThrustDirection3 = 0;
+GMAT BGTX5.DutyCycle = 1;
+GMAT BGTX5.ThrustScaleFactor = 1;
+GMAT BGTX5.DecrementMass = true;
+GMAT BGTX5.Tank = {AFM315E};
+GMAT BGTX5.MixRatio = [ 1 ];
+GMAT BGTX5.GravitationalAccel = 9.81;
+GMAT BGTX5.C1 = 18;
+GMAT BGTX5.C2 = 0;
+GMAT BGTX5.C3 = 0;
+GMAT BGTX5.C4 = 0;
+GMAT BGTX5.C5 = 0;
+GMAT BGTX5.C6 = 0;
+GMAT BGTX5.C7 = 0;
+GMAT BGTX5.C8 = 0;
+GMAT BGTX5.C9 = 0;
+GMAT BGTX5.C10 = 0;
+GMAT BGTX5.C11 = 0;
+GMAT BGTX5.C12 = 0;
+GMAT BGTX5.C13 = 0;
+GMAT BGTX5.C14 = 0;
+GMAT BGTX5.C15 = 0;
+GMAT BGTX5.C16 = 0;
+GMAT BGTX5.K1 = 280;
+GMAT BGTX5.K2 = 0;
+GMAT BGTX5.K3 = 0;
+GMAT BGTX5.K4 = 0;
+GMAT BGTX5.K5 = 0;
+GMAT BGTX5.K6 = 0;
+GMAT BGTX5.K7 = 0;
+GMAT BGTX5.K8 = 0;
+GMAT BGTX5.K9 = 0;
+GMAT BGTX5.K10 = 0;
+GMAT BGTX5.K11 = 0;
+GMAT BGTX5.K12 = 0;
+GMAT BGTX5.K13 = 0;
+GMAT BGTX5.K14 = 0;
+GMAT BGTX5.K15 = 0;
+GMAT BGTX5.K16 = 0;
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel DefaultProp_ForceModel;
+GMAT DefaultProp_ForceModel.CentralBody = Luna;
+GMAT DefaultProp_ForceModel.PrimaryBodies = {Luna};
+GMAT DefaultProp_ForceModel.PointMasses = {Earth, Jupiter, Sun};
+GMAT DefaultProp_ForceModel.Drag = None;
+GMAT DefaultProp_ForceModel.SRP = Off;
+GMAT DefaultProp_ForceModel.RelativisticCorrection = Off;
+GMAT DefaultProp_ForceModel.ErrorControl = RSSStep;
+GMAT DefaultProp_ForceModel.GravityField.Luna.Degree = 4;
+GMAT DefaultProp_ForceModel.GravityField.Luna.Order = 4;
+GMAT DefaultProp_ForceModel.GravityField.Luna.StmLimit = 100;
+GMAT DefaultProp_ForceModel.GravityField.Luna.PotentialFile = 'LP165P.cof';
+GMAT DefaultProp_ForceModel.GravityField.Luna.TideModel = 'None';
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator DefaultProp;
+GMAT DefaultProp.FM = DefaultProp_ForceModel;
+GMAT DefaultProp.Type = RungeKutta89;
+GMAT DefaultProp.InitialStepSize = 60;
+GMAT DefaultProp.Accuracy = 9.999999999999999e-12;
+GMAT DefaultProp.MinStep = 0.001;
+GMAT DefaultProp.MaxStep = 2700;
+GMAT DefaultProp.MaxStepAttempts = 50;
+GMAT DefaultProp.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create ImpulsiveBurn ImpulsiveBurn1;
+GMAT ImpulsiveBurn1.CoordinateSystem = MoonMJ2000Eq;
+GMAT ImpulsiveBurn1.Element1 = -5;
+GMAT ImpulsiveBurn1.Element2 = 0;
+GMAT ImpulsiveBurn1.Element3 = 0;
+GMAT ImpulsiveBurn1.DecrementMass = true;
+GMAT ImpulsiveBurn1.Tank = {AFM315E};
+GMAT ImpulsiveBurn1.Isp = 300;
+GMAT ImpulsiveBurn1.GravitationalAccel = 9.81;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2020-05-17 14:16:10
+
+%-------------------------------------------------------------------------
+% Configure coordinate systems
+%-------------------------------------------------------------------------
+
+Create CoordinateSystem MoonMJ2000Eq;
+GMAT MoonMJ2000Eq.Origin = Luna;
+GMAT MoonMJ2000Eq.Axes = MJ2000Eq;
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+
+Create Yukon Yukon1;
+GMAT Yukon1.ShowProgress = true;
+GMAT Yukon1.ReportStyle = Normal;
+GMAT Yukon1.ReportFile = 'YukonYukon1.data';
+GMAT Yukon1.MaximumIterations = 200;
+GMAT Yukon1.UseCentralDifferences = false;
+GMAT Yukon1.FeasibilityTolerance = 0.0001;
+GMAT Yukon1.HessianUpdateMethod = SelfScaledBFGS;
+GMAT Yukon1.MaximumFunctionEvals = 1000;
+GMAT Yukon1.OptimalityTolerance = 0.0001;
+GMAT Yukon1.FunctionTolerance = 0.0001;
+GMAT Yukon1.MaximumElasticWeight = 10000;
+
+Create DifferentialCorrector DC1;
+GMAT DC1.ShowProgress = true;
+GMAT DC1.ReportStyle = Normal;
+GMAT DC1.ReportFile = 'DifferentialCorrectorDC1.data';
+GMAT DC1.MaximumIterations = 25;
+GMAT DC1.DerivativeMethod = ForwardDifference;
+GMAT DC1.Algorithm = NewtonRaphson;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OrbitView DefaultOrbitView;
+GMAT DefaultOrbitView.SolverIterations = Current;
+GMAT DefaultOrbitView.UpperLeft = [ 0.1638888888888889 0.02222222222222222 ];
+GMAT DefaultOrbitView.Size = [ 0.4152777777777778 0.3866666666666667 ];
+GMAT DefaultOrbitView.RelativeZOrder = 852;
+GMAT DefaultOrbitView.Maximized = false;
+GMAT DefaultOrbitView.Add = {IceNine, Luna};
+GMAT DefaultOrbitView.CoordinateSystem = MoonMJ2000Eq;
+GMAT DefaultOrbitView.DrawObject = [ true true ];
+GMAT DefaultOrbitView.DataCollectFrequency = 1;
+GMAT DefaultOrbitView.UpdatePlotFrequency = 50;
+GMAT DefaultOrbitView.NumPointsToRedraw = 0;
+GMAT DefaultOrbitView.ShowPlot = true;
+GMAT DefaultOrbitView.MaxPlotPoints = 200000;
+GMAT DefaultOrbitView.ShowLabels = true;
+GMAT DefaultOrbitView.ViewPointReference = IceNine;
+GMAT DefaultOrbitView.ViewPointVector = IceNine;
+GMAT DefaultOrbitView.ViewDirection = Luna;
+GMAT DefaultOrbitView.ViewScaleFactor = 1;
+GMAT DefaultOrbitView.ViewUpCoordinateSystem = MoonMJ2000Eq;
+GMAT DefaultOrbitView.ViewUpAxis = Z;
+GMAT DefaultOrbitView.EclipticPlane = Off;
+GMAT DefaultOrbitView.XYPlane = On;
+GMAT DefaultOrbitView.WireFrame = Off;
+GMAT DefaultOrbitView.Axes = On;
+GMAT DefaultOrbitView.Grid = On;
+GMAT DefaultOrbitView.SunLine = Off;
+GMAT DefaultOrbitView.UseInitialView = On;
+GMAT DefaultOrbitView.StarCount = 7000;
+GMAT DefaultOrbitView.EnableStars = Off;
+GMAT DefaultOrbitView.EnableConstellations = Off;
+
+Create GroundTrackPlot DefaultGroundTrackPlot;
+GMAT DefaultGroundTrackPlot.SolverIterations = Current;
+GMAT DefaultGroundTrackPlot.UpperLeft = [ 0.5798611111111112 0.02222222222222222 ];
+GMAT DefaultGroundTrackPlot.Size = [ 0.4180555555555556 0.3866666666666667 ];
+GMAT DefaultGroundTrackPlot.RelativeZOrder = 840;
+GMAT DefaultGroundTrackPlot.Maximized = false;
+GMAT DefaultGroundTrackPlot.Add = {IceNine, Earth};
+GMAT DefaultGroundTrackPlot.DataCollectFrequency = 10;
+GMAT DefaultGroundTrackPlot.UpdatePlotFrequency = 50;
+GMAT DefaultGroundTrackPlot.NumPointsToRedraw = 0;
+GMAT DefaultGroundTrackPlot.ShowPlot = true;
+GMAT DefaultGroundTrackPlot.MaxPlotPoints = 200000;
+GMAT DefaultGroundTrackPlot.CentralBody = Luna;
+GMAT DefaultGroundTrackPlot.TextureMap = 'Moon_HermesCelestiaMotherlode.jpg';
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Propagate DefaultProp(IceNine, 'STM') {IceNine.ElapsedSecs = 12000.0};
